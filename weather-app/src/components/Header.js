@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Title } from "./MainInput";
-import HeaderInput from "./HeaderInput";
+import { Title } from "./Main";
+import MainInput from "./MainInput";
+import { Link } from "react-router-dom";
 
 const MainHeader = styled.header`
   display: flex;
@@ -18,14 +19,26 @@ const NavTitle = Title.extend`
   font-weight: bold;
   font-size: 3rem;
   margin-left: 15px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+`;
+const InputDiv = styled.div`
+  display: flex;
 `;
 
 class Header extends Component {
   render() {
     return (
       <MainHeader>
-        <NavTitle>Clever Title</NavTitle>
-        <HeaderInput />
+        <NavTitle>
+          <Link to="/">Simple Weather</Link>
+        </NavTitle>
+        <InputDiv>
+          <MainInput retrieveValue={this.props.retrieveValue} />
+        </InputDiv>
       </MainHeader>
     );
   }

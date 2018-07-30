@@ -13,15 +13,23 @@ const MainSection = styled.main`
   background-size: cover;
   flex-direction: column;
 `;
+const Title = styled.h1`
+  color: white;
+  font-weight: 200;
+  font-family: Helvetica;
+  font-size: 2.5rem;
+`;
 
 class Main extends Component {
   render() {
     return (
       <MainSection>
-        <MainInput />
+        <Title>Enter a City and State</Title>
+        <MainInput retrieveValue={this.props.retrieveValue} />
       </MainSection>
     );
   }
 }
 
 export default Main;
+export { Title };

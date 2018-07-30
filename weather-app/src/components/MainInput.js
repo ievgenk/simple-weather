@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const Title = styled.h1`
-  color: white;
-  font-weight: 200;
-  font-family: Helvetica;
-  font-size: 2.5rem;
-`;
-
 const Input = styled.input`
   font-size: 2rem;
   margin: 5px;
@@ -28,16 +21,35 @@ const PrimaryBtn = styled.button`
 `;
 
 class MainInput extends Component {
+  state = {
+    inputValue: ""
+  };
+
+  handleChange = event => {
+    event.persist();
+    this.setState(() => ({ inputValue: event.target.value }));
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.retrieveValue(this.state.inputValue);
+    this.setState(() => ({ inputValue: "" }));
+  };
+
   render() {
     return (
-      <React.Fragment>
-        <Title>Enter a City and State</Title>
-        <Input type="text" placeholder="Portland, Oregon" />
-        <PrimaryBtn>Get Weather</PrimaryBtn>
-      </React.Fragment>
+      <form onSubmit={this.handleSubmit}>
+        <Input
+          onChange={this.handleChange}
+          type="text"
+          value={this.state.inputValue}
+          placeholder="Portland, Oregon"
+        />
+        <PrimaryBtn type="submit">Get Weather</PrimaryBtn>
+      </form>
     );
   }
 }
 
 export default MainInput;
-export { Title, Input, PrimaryBtn };
+export { Input, PrimaryBtn };
