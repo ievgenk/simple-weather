@@ -32,7 +32,9 @@ class MainInput extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.retrieveValue(this.state.inputValue);
+    // this.props.retrieveValue(this.state.inputValue);
+    // this.setState(() => ({ inputValue: "" }));
+    this.props.history.push(`/forecast?city=${this.state.inputValue}`);
     this.setState(() => ({ inputValue: "" }));
   };
 

@@ -25,7 +25,10 @@ class Main extends Component {
     return (
       <MainSection>
         <Title>Enter a City and State</Title>
-        <MainInput retrieveValue={this.props.retrieveValue} />
+        <MainInput
+          retrieveValue={this.props.retrieveValue}
+          history={this.props.history}
+        />
       </MainSection>
     );
   }

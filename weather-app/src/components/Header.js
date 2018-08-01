@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const MainHeader = styled.header`
   display: flex;
   width: 100vw;
-  height: 10%;
+  min-height: 80px;
   color: white;
   background-color: #ff5a00;
   justify-content: space-between;
@@ -37,7 +37,10 @@ class Header extends Component {
           <Link to="/">Simple Weather</Link>
         </NavTitle>
         <InputDiv>
-          <MainInput retrieveValue={this.props.retrieveValue} />
+          <MainInput
+            retrieveValue={this.props.retrieveValue}
+            history={this.props.history}
+          />
         </InputDiv>
       </MainHeader>
     );

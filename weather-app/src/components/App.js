@@ -2,31 +2,18 @@ import React, { Component } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import NotFound from "./NotFound";
+import Forecast from "./Forecast";
+import SpecificDay from "./SpecificDay";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   state = {
-    cityName: "",
-    apiKey: "06118f89ca55374e18df7a4a6958034f"
+    cityName: ""
   };
 
-  componentDidUpdate() {
-    // return fetch(
-    //   `http://api.openweathermap.org/data/2.5/weather?q=${
-    //     this.state.cityName
-    //   }&type=accurate&APPID=${this.state.apiKey}&units=metric`
-    // )
-    //   .then(response => response.json())
-    //   .then(data => console.log(data));
-
-    return fetch(
-      `http://api.openweathermap.org/data/2.5/forecast?q=${
-        this.state.cityName
-      }&APPID=${this.state.apiKey}&units=metric&cnt=5`
-    )
-      .then(response => response.json())
-      .then(data => console.log(data));
-  }
+  navigateToForecast = () => {
+    this.props.history.push(`/forecast?city=${this.state.cityName}`);
+  };
 
   retrieveValue = val => {
     this.setState(() => ({ cityName: val }));
@@ -36,7 +23,12 @@ class App extends Component {
     return (
       <Router>
         <React.Fragment>
-          <Header retrieveValue={this.retrieveValue} />
+          <Route
+            path="/"
+            render={props => (
+              <Header {...props} retrieveValue={this.retrieveValue} />
+            )}
+          />
           <Switch>
             <Route
               exact
@@ -45,6 +37,7 @@ class App extends Component {
                 <Main {...props} retrieveValue={this.retrieveValue} />
               )}
             />
+            <Route path="/forecast" component={Forecast} />
             <Route component={NotFound} />
           </Switch>
         </React.Fragment>
